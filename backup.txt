@@ -16,10 +16,6 @@ services:
       - net_admin
       - sys_module
     restart: unless-stopped
-
   nginx-authkey-test:
     image: nginx
-    container_name: nginx-authkey-test
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     network_mode: service:ts-authkey-test
