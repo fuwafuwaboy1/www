@@ -18,6 +18,9 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1 
     restart: unless-stopped
+
   nginx-authkey-test:
     image: nginx
     network_mode: service:ts-authkey-test
+    volumes:
+      - ${PWD}/nginx.conf:/etc/nginx/nginx.conf
