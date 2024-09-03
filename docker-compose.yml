@@ -8,7 +8,7 @@ services:
       - TS_AUTHKEY=tskey-auth-kFEbZjFxga11CNTRL-CWv4jonJ8NWxffTy7TwZNWpDKbhJhgAZ
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
-      - TS_EXTRA_ARGS=--advertise-exit-node --ssh
+      - TS_EXTRA_ARGS=--advertise-exit-node --advertise-routes=192.168.1.0/24 --ssh
     volumes:
       - ${PWD}/ts-authkey-test/state:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
@@ -16,10 +16,6 @@ services:
       - net_admin
       - sys_module
     restart: unless-stopped
-
   nginx-authkey-test:
     image: nginx
-    container_name: nginx-authkey-test
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     network_mode: service:ts-authkey-test
